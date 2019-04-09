@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    let fieldHeight = 1000;
+    let fieldHeight = 10000;
     let fieldWidth = fieldHeight;
     let pondRadius = (fieldWidth / 2);
     let pondCenterX = (fieldWidth / 2);
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
         function distanceFromCenterOfPond(randomX, randomY) {
-            
+
             let distanceX = (randomX - pondCenterX);
             let distanceY = (randomY - pondCenterY);
 
