@@ -135,8 +135,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     x = (x - (x - randomX) * .1);
                     y = (y - (y - randomY) * .1);
                 } else if (originOfCannonball === "d") {
-                    y = (y - (y - randomY) * .1);
                     x = (x + (randomX - x) * .1);
+                    y = (y - (y + randomY) * .1);
                 }
                 ctx.beginPath();
                 ctx.arc(x, y, 5, 0, 2 * Math.PI);

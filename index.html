@@ -1,15 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
     <h1 style="text-align: center;">Welcome to the Pi Pond.</h1>
-    <h2>Open console to see results.</h2>
-    <a href="https://github.com/NDHF/PiPond"><h2>Download here.</h2></a>
+    <p>Total shots fired: <span id="totalShotsFiredSpan"></span></p>
+    <p>Shots inside pond: <span id="shotsInsidePondSpan"></span></p>
+    <p>Approximation of Pi after <span id="numberOfIterationsSpan"></span> shots: <span
+            id="approximationOfPiSpan"></span></p>
+    <canvas id="pondCanvas" width="200" height="200"></canvas>
+
+    <div id="explanation">
+        <h3>So what is this, anyway?</h3>
+        <p>The Pi Pond calculates Pi by firing cannonballs at random into a pond.</p>
+        <p>The simulation plots random coordinates onto a square that contains a circle of identical width.</p>
+        <p>Pi is the number of coordinates that fell inside the circle, divided by the total number of coordinates plotted, multiplied by four.</p>
+        <p>The Pi Pond works due to the relationship between the area of a square and the area of a circle.</p>
+        <p>It was inspired by a challenge in A.K. Dewdney's  <a
+            href="https://www.amazon.com/Armchair-Universe-Exploration-Computer-Worlds/dp/0716719398"><i>The
+                Armchair Universe</i></a>, a collection of articles about computers from Scientific American.
+        </p>
+        <p>The Pi Pond was programmed using Vanilla JS and the HTML5 Canvas element.</p>
+    </div>
+
+    <footer>
+        <h3>Credits:</h3>
+        <ul>
+            <li><a href="https://freesound.org/people/OtisJames/sounds/215162/">Thud.wav</a> by Otis James, Public
+                Domain</li>
+            <li><a href="https://freesound.org/people/Isaac200000/sounds/184650/">Cannon1.wav</a> by Isaac200000, Public
+                Domain</li>
+            <li><a href="https://freesound.org/people/SpliceSound/sounds/260131/">Cannonball off dock, splashing,
+                    swimming.wav</a> by SpliceSound, Public Domain</li>
+        </ul>
+    </footer>
     <script src="logic.js"></script>
 </body>
+
 </html>
