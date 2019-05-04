@@ -1,10 +1,46 @@
+console.log(
+    "WELCOME TO THE PI POND" + "\n" +
+    "Copyright 2019 Nicholas Bernhard"
+);
+
 document.addEventListener("DOMContentLoaded", function () {
 
-    let pondRadius = 100;
-    let pondCenterX = 100;
-    let pondCenterY = 100;
+    // QUALITY-OF-LIFE FUNCTIONS 
+
+    function getById(id) {
+        return document.getElementById(id);
+    }
+
+    // VERY IMPORTANT GLOBAL VARIABLES
+
+    let pondCanvas = getById("pondCanvas");
+
+    //     The whole function relies on the fieldWidth variable. 
+    // Larger integers will offer a more accurate approximation 
+    // of Pi, but will take longer to calculate.
+    const fieldWidth = 10000;
+
+    // VARIABLES FOR CONTROLLING SIZE AND SCALING OF CANVAS ELEMENT
+
+    let screenWidth = window.innerWidth;
+    let canvasWidth = (screenWidth * .4); // CSS sets canvas to 40% of screen width
+    let canvasRadius = (canvasWidth / 2);
+
+    // Set width and height of canvas element
+    pondCanvas.width = canvasWidth;
+    pondCanvas.height = canvasWidth;
+
+    // This variable is used in the drawCannonball function to
+    // control scaling.
+    let visualizationNumber = Math.floor(fieldWidth / canvasWidth);
+
+    let pondRadius = (fieldWidth / 2);
+    let pondCenterX = (fieldWidth / 2);
+    let pondCenterY = (fieldWidth / 2);
     let shotsInsidePond = 0;
     let totalShotsFired = 0;
+
+    // VARIABLES FOR AUDIO ASSETS
 
     let cannonFire = new Audio("assets/cannonFire.wav");
     let thud = new Audio("assets/thud.wav");
@@ -12,29 +48,34 @@ document.addEventListener("DOMContentLoaded", function () {
     let splash = new Audio("assets/splash.wav");
     let splashIsPlaying = false;
 
-    function getById(id) {
-        return document.getElementById(id);
-    }
+    // VARIABLES AND FUNCTIONS FOR DRAWING CANVAS ELEMENT
 
-    let pondCanvas = getById("pondCanvas");
-    let ctx = pondCanvas.getContext("2d");
+    let ctx = pondCanvas.getContext("2d"); // Lets you draw in canvas element
+
+    // This variable is used clear the interval of the drawCannonball function
+    let counter = 0; 
 
     function drawPond(firstTime) {
+        // Without the firstTime argument, the canvas element
+        // will appear to flash on loading.
         if (firstTime !== true) {
-            ctx.clearRect(0, 0, 200, 200);
+            ctx.clearRect(0, 0, canvasWidth, canvasWidth);
         }
         ctx.beginPath();
         ctx.fillStyle = "#009933";
-        ctx.fillRect(0, 0, 200, 200);
+        ctx.fillRect(0, 0, canvasWidth, canvasWidth);
         ctx.beginPath();
-        ctx.arc(100, 100, 100, 0, 2 * Math.PI);
+        ctx.arc(canvasRadius, canvasRadius, canvasRadius, 0, 2 * Math.PI);
         ctx.stroke();
         ctx.fillStyle = "#00FFFF";
         ctx.fill();
     }
+    // The function below draws the pond for the first time. 
     drawPond(true);
 
-    let counter = 0;
+    function updateShotsFired() {
+        getById("totalShotsFiredSpan").innerHTML = totalShotsFired;
+    };
 
     function fireAway() {
 
@@ -50,9 +91,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let shotIsInsidePond = false;
 
-        totalShotsFired += 1;
+        //    This function creates the random coordinates for each shot,
+        // and determines whether it falls within the circle or not.
+        // All the core math is done here, subsequent functions 
+        // are dedicated to visualizing the results. 
 
+        //    You may run the function chain in a while-loop to simulate
+        // a large number of shots quickly, and then call the displayResults
+        // function.
         function functionChain() {
+
+            totalShotsFired += 1;
+            updateShotsFired();
 
             function isCoordinateWithinCircle(trueOrFalse) {
                 if (trueOrFalse === true) {
@@ -79,18 +129,24 @@ document.addEventListener("DOMContentLoaded", function () {
             };
 
             function plotRandomCoordinate() {
-                randomX = Math.floor(Math.random() * (200 + 1));
-                randomY = Math.floor(Math.random() * (200 + 1));
+                randomX = Math.floor(Math.random() * (fieldWidth + 1));
+                randomY = Math.floor(Math.random() * (fieldWidth + 1));
                 distanceFromCenterOfPond(randomX, randomY);
             };
             plotRandomCoordinate();
         };
 
+        //     This function determines the path of the cannonball,
+        // in order to animate it with the drawCannonball function.
+        // The cannonball will always fire from the opposite corner
+        // of its target coordinates. For example, if the random
+        // coordinate is in the top-left, the cannonball will fire
+        // from the bottom-right. 
         function determineRandomCoordinatesQuadrant() {
-            let leftHalf = ((randomX >= 0) && (randomX <= 100));
-            let rightHalf = ((randomX >= 101) && (randomX <= 200));
-            let upperHalf = ((randomY >= 0) && (randomY <= 100));
-            let lowerHalf = ((randomY >= 101) && (randomY <= 200));
+            let leftHalf = ((randomX >= 0) && (randomX <= pondRadius));
+            let rightHalf = ((randomX >= (pondRadius + 1)) && (randomX <= fieldWidth));
+            let upperHalf = ((randomY >= 0) && (randomY <= pondRadius));
+            let lowerHalf = ((randomY >= (pondRadius + 1)) && (randomY <= fieldWidth));
 
             let upperLeft = (leftHalf && upperHalf);
             let upperRight = (rightHalf && upperHalf);
@@ -98,33 +154,47 @@ document.addEventListener("DOMContentLoaded", function () {
             let lowerLeft = (leftHalf && lowerHalf);
 
             if (upperLeft) {
-                x = 200;
-                y = 200;
+                x = fieldWidth;
+                y = fieldWidth;
                 originOfCannonball = "c";
             } else if (upperRight) {
                 x = 0;
-                y = 200;
+                y = fieldWidth;
                 originOfCannonball = "d";
             } else if (lowerRight) {
                 x = 0;
                 y = 0;
                 originOfCannonball = "a";
             } else if (lowerLeft) {
-                x = 200;
+                x = fieldWidth;
                 y = 0;
                 originOfCannonball = "b";
             }
         }
 
+        //     This function displays the new calculation of Pi. It is called
+        // inside the drawCannonball function, after the cannonball has
+        // reached its target coordinate and the proper audio asset
+        // has been played. 
+        function displayResults() {
+            getById("shotsInsidePondSpan").innerHTML = shotsInsidePond;
+            let ratioOfInsideToTotal = (shotsInsidePond / totalShotsFired);
+            let approximationOfPi = (ratioOfInsideToTotal * 4);
+            getById("numberOfIterationsSpan").innerHTML = totalShotsFired;
+            getById("approximationOfPiSpan").innerHTML = approximationOfPi;
+        };
+
+        // This function animates the cannonball flying across the canvas.
+        // It is called using a setInterval method.
         function drawCannonball() {
-            ctx.clearRect(0, 0, 200, 200);
+            ctx.clearRect(0, 0, canvasWidth, canvasWidth);
             counter += 1;
             if (counter === 160) {
                 clearInterval(draw);
                 counter = 0;
             }
             drawPond();
-            if ((Math.abs(randomX - x) > 3) && (Math.abs(randomY - y) > 3)) {
+            if ((Math.abs(randomX - x) > 30) && (Math.abs(randomY - y) > 30)) {
                 if (originOfCannonball === "a") {
                     x = (x + (randomX - x) * .1);
                     y = (y + (randomY - y) * .1);
@@ -139,11 +209,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     x = (x + (randomX - x) * .1);
                 }
                 ctx.beginPath();
-                ctx.arc(x, y, 5, 0, 2 * Math.PI);
+                // The visualization number allows the animation to scale 
+                // based on screen size.
+                ctx.arc((x / visualizationNumber), (y / visualizationNumber), 10, 0, 2 * Math.PI);
                 ctx.fillStyle = "black";
                 ctx.fill();
             } else {
-                ctx.font = "15px Arial";
+                ctx.font = "30px Arial";
                 ctx.fillStyle = "black";
                 ctx.textAlign = "center";
                 let soundEffectText;
@@ -160,24 +232,15 @@ document.addEventListener("DOMContentLoaded", function () {
                         thud.play();
                     }
                 }
-                ctx.fillText(soundEffectText, x, y);
+                ctx.fillText(soundEffectText, (x / visualizationNumber), (y / visualizationNumber));
+                displayResults();
             }
         }
-
-        function displayResults() {
-            getById("totalShotsFiredSpan").innerHTML = totalShotsFired;
-            getById("shotsInsidePondSpan").innerHTML = shotsInsidePond;
-            let ratioOfInsideToTotal = (shotsInsidePond / totalShotsFired);
-            let approximationOfPi = (ratioOfInsideToTotal * 4);
-            getById("numberOfIterationsSpan").innerHTML = totalShotsFired;
-            getById("approximationOfPiSpan").innerHTML = approximationOfPi;
-        };
         functionChain();
-        displayResults();
         determineRandomCoordinatesQuadrant();
+        // Variable used to clear the interval
         let draw = setInterval(drawCannonball, 30);
     }
-    // fireAway();
     setInterval(fireAway, 5000);
 
 });

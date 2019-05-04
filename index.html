@@ -6,25 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        canvas {
+            width: 40%;
+            margin-left: 30%;
+            margin-right: 30%;
+        }
+    </style>
 </head>
 
-<body>
+<body> 
     <h1 style="text-align: center;">Welcome to the Pi Pond.</h1>
     <p>Total shots fired: <span id="totalShotsFiredSpan"></span></p>
     <p>Shots inside pond: <span id="shotsInsidePondSpan"></span></p>
     <p>Approximation of Pi after <span id="numberOfIterationsSpan"></span> shots: <span
             id="approximationOfPiSpan"></span></p>
-    <canvas id="pondCanvas" width="200" height="200"></canvas>
+    <canvas id="pondCanvas"></canvas>
 
     <div id="explanation">
         <h3>So what is this, anyway?</h3>
         <p>The Pi Pond calculates Pi by firing cannonballs at random into a pond.</p>
-        <p>The simulation plots random coordinates onto a square that contains a circle of identical width.</p>
-        <p>Pi is the number of coordinates that fell inside the circle, divided by the total number of coordinates plotted, multiplied by four.</p>
-        <p>The Pi Pond works due to the relationship between the area of a square and the area of a circle.</p>
-        <p>It was inspired by a challenge in A.K. Dewdney's  <a
-            href="https://www.amazon.com/Armchair-Universe-Exploration-Computer-Worlds/dp/0716719398"><i>The
-                Armchair Universe</i></a>, a collection of articles about computers from Scientific American.
+        <h4>The Math</h4>
+        <p>Imagine a square whose length is twice the radius of a certain circle. The area of the circle is Pi *
+            R<sup>2</sup>.
+            The area of the square is the square of its length, L<sup>2</sup>. Since the length of the square is twice
+            the radius of the circle,
+            we can write the area of the square as (2R)<sup>2</sup>, or 4R<sup>2</sup>.</p>
+        <p>The ratio of the area of the circle to the area of the square is Pi * R<sup>2</sup> / 4R<sup>2</sup>, or Pi /
+            4. Therefore, Pi is equal to the ratio between the two areas, multiplied by 4.</p>
+            <p>By plotting coordinates onto the field (the square) at random, and checking which coordinates fall within the pond (the circle), 
+                we can approximate the area of the two shapes. The more random coordinates that are plotted, the closer the approximation of Pi.</p>
+        <p>It was inspired by a challenge in A.K. Dewdney's <a
+                href="https://www.amazon.com/Armchair-Universe-Exploration-Computer-Worlds/dp/0716719398"><i>The
+                    Armchair Universe</i></a>, a collection of articles about computers from Scientific American.
         </p>
         <p>The Pi Pond was programmed using Vanilla JS and the HTML5 Canvas element.</p>
     </div>
@@ -40,7 +54,7 @@
                     swimming.wav</a> by SpliceSound, Public Domain</li>
         </ul>
     </footer>
-    <script src="logic.js"></script>
 </body>
+<script src="logic.js"></script>
 
 </html>
