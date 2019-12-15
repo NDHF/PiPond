@@ -23,7 +23,13 @@ document.addEventListener("DOMContentLoaded", function () {
     // VARIABLES FOR CONTROLLING SIZE AND SCALING OF CANVAS ELEMENT
 
     let screenWidth = window.innerWidth;
-    let canvasWidth = (screenWidth * .4); // CSS sets canvas to 40% of screen width
+    let canvasWidth;
+    if ((window.innerWidth > window.innerHeight) && (window.innerWidth > 1201)) {
+        canvasWidth = (screenWidth);
+    } else if (window.innerWidth < window.innerHeight) {
+        canvasWidth = (screenWidth * .4); 
+        // For mobile, portrait, CSS sets canvas to 40% of screen width
+    }
     let canvasRadius = (canvasWidth / 2);
 
     // Set width and height of canvas element
@@ -33,6 +39,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // This variable is used in the drawCannonball function to
     // control scaling.
     let visualizationNumber = Math.floor(fieldWidth / canvasWidth);
+    console.log("VISUALIZATION NUMBER");
+    console.log(visualizationNumber);
 
     let pondRadius = (fieldWidth / 2);
     let pondCenterX = (fieldWidth / 2);
@@ -211,11 +219,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 ctx.beginPath();
                 // The visualization number allows the animation to scale 
                 // based on screen size.
-                ctx.arc((x / visualizationNumber), (y / visualizationNumber), 10, 0, 2 * Math.PI);
+                let cannonballRadius = 10;
+                if ((window.innerWidth > window.innerHeight) && (window.innerWidth > 1201)) {
+                    cannonballRadius = 45;
+                } else if (window.innerWidth < window.innerHeight) {
+                    cannonballRadius = 5;
+                    // For mobile, portrait, CSS sets canvas to 40% of screen width
+                }
+                ctx.arc((x / visualizationNumber), (y / visualizationNumber), cannonballRadius, 0, 2 * Math.PI);
                 ctx.fillStyle = "black";
                 ctx.fill();
             } else {
                 ctx.font = "30px Arial";
+                if ((window.innerWidth > window.innerHeight) && (window.innerWidth > 1201)) {
+                    ctx.font = "90px Arial";
+                } else if (window.innerWidth < window.innerHeight) {
+                    ctx.font = "10px Arial";
+                    // For mobile, portrait, CSS sets canvas to 40% of screen width
+                }
                 ctx.fillStyle = "black";
                 ctx.textAlign = "center";
                 let soundEffectText;
