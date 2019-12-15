@@ -39,14 +39,25 @@ document.addEventListener("DOMContentLoaded", function () {
     // This variable is used in the drawCannonball function to
     // control scaling.
     let visualizationNumber = Math.floor(fieldWidth / canvasWidth);
-    console.log("VISUALIZATION NUMBER");
-    console.log(visualizationNumber);
 
     let pondRadius = (fieldWidth / 2);
     let pondCenterX = (fieldWidth / 2);
     let pondCenterY = (fieldWidth / 2);
     let shotsInsidePond = 0;
     let totalShotsFired = 0;
+    
+    // LOAD STORED VALUES, IF THEY EXIST
+
+    let shotsInsidePondSTORED = localStorage.getItem("shotsInsidePond");
+    let totalShotsFiredSTORED = localStorage.getItem("totalShotsFired");
+    if ((shotsInsidePondSTORED !== null) && (totalShotsFiredSTORED !== null)) {
+        shotsInsidePond = parseInt(shotsInsidePondSTORED);
+        totalShotsFired = parseInt(totalShotsFiredSTORED);
+        getById("shotsInsidePondSpan").innerHTML = shotsInsidePond;
+        getById("totalShotsFiredSpan").innerHTML = totalShotsFired;
+        let piApprox = (shotsInsidePond / totalShotsFired) * 4;
+        getById("approximationOfPiSpan").innerHTML = piApprox;
+    }
 
     // VARIABLES FOR AUDIO ASSETS
 
@@ -188,6 +199,10 @@ document.addEventListener("DOMContentLoaded", function () {
             getById("shotsInsidePondSpan").innerHTML = shotsInsidePond;
             let ratioOfInsideToTotal = (shotsInsidePond / totalShotsFired);
             let approximationOfPi = (ratioOfInsideToTotal * 4);
+            // SAVE VALUES TO LOCAL STORAGE
+            localStorage.setItem("shotsInsidePond", shotsInsidePond);
+            localStorage.setItem("totalShotsFired", totalShotsFired);
+            // DISPLAY OTHER VALUES
             getById("numberOfIterationsSpan").innerHTML = totalShotsFired;
             getById("approximationOfPiSpan").innerHTML = approximationOfPi;
         };

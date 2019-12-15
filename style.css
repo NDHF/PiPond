@@ -1,3 +1,11 @@
+body {
+    background-image: url("assets/images/background.jpg");
+    background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+    background-attachment: fixed;
+}
+
 div#resultsContainer {
     display: flex;
     flex-direction: column;
