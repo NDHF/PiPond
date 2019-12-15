@@ -1,0 +1,125 @@
+div#resultsContainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px outset;
+}
+
+div#totalShotsFiredRow {
+    order: 1;
+}
+
+div#shotsInsidePondRow {
+    order: 2;
+}
+
+div#calculationOfPiRow {
+    order: 3;
+}
+
+div.resultsRow {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+div.resultsRow span {
+    text-align: center;
+}
+
+div.resultsRow span:first-child {
+    font-weight: bold;
+}
+
+div#explanation {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15%;
+}
+
+div#explanation p {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+div#pleaseRotateDevice {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgray;
+}
+
+div#pleaseRotateDeviceMessage {
+    border: 1px outset;
+    border-radius: 25px;
+    display: block;
+    width: 50%;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/* DESKTOP */
+
+@media only screen and (orientation: landscape) and (min-width: 1201px) {
+    canvas {
+        width: 40%;
+        margin-left: 30%;
+        margin-right: 30%;
+    }
+
+    div#resultsContainer {
+        width: 50%;
+    }
+
+    div#explanation {
+        width: 66%;
+    }
+
+    div#pleaseRotateDevice {
+        visibility: collapse;
+        height: 0px;
+        width: 0px;
+    }
+}
+
+/* MOBILE, PORTRAIT */
+
+@media only screen and (orientation: portrait) {
+    canvas {
+        width: 100%;
+    }
+
+    div#resultsContainer {
+        width: 85%;
+    }
+
+    div#explanation {
+        width: 96%;
+    }
+
+    div#pleaseRotateDevice {
+        visibility: collapse;
+        height: 0px;
+        width: 0px;
+    }
+}
+
+/* MOBILE, LANDSCAPE */
+
+@media only screen and (orientation: landscape) and (max-width: 1200px) {
+    div#pleaseRotateDevice {
+        visibility: visible;
+    }
+}
