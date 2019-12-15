@@ -5,8 +5,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>THE &pi; POND</title>
+    <title>&pi; POND</title>
     <style>
+        div#resultsContainer {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            border-bottom: 1px outset;
+        }
+
+        div#totalShotsFiredRow {
+            order: 1;
+        }
+
+        div#shotsInsidePondRow {
+            order: 2;
+        }
+
+        div#calculationOfPiRow {
+            order: 3;
+        }
+
+        div.resultsRow {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+        }
+
+        div.resultsRow span {
+            text-align: center;
+        }
+
+        div.resultsRow span:first-child {
+            font-weight: bold;
+        }
+
+        div#explanation {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 15%;
+        }
+
+        div#explanation p {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        div#pleaseRotateDevice {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: lightgray;
+        }
+
+        div#pleaseRotateDeviceMessage {
+            border: 1px outset;
+            border-radius: 25px;
+            display: block;
+            width: 50%;
+            padding: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
         /* DESKTOP */
         @media only screen and (orientation: landscape) and (min-width: 1201px) {
             canvas {
@@ -14,10 +86,45 @@
                 margin-left: 30%;
                 margin-right: 30%;
             }
+
+            div#resultsContainer {
+                width: 50%;
+            }
+
+            div#explanation {
+                width: 66%;
+            }
+
+            div#pleaseRotateDevice {
+                visibility: collapse;
+                height: 0px;
+                width: 0px;
+            }
         }
+
         @media only screen and (orientation: portrait) {
             canvas {
                 width: 100%;
+            }
+
+            div#resultsContainer {
+                width: 85%;
+            }
+
+            div#explanation {
+                width: 96%;
+            }
+
+            div#pleaseRotateDevice {
+                visibility: collapse;
+                height: 0px;
+                width: 0px;
+            }
+        }
+
+        @media only screen and (orientation: landscape) and (max-width: 1200px) {
+            div#pleaseRotateDevice {
+                visibility: visible;
             }
         }
     </style>
@@ -25,37 +132,50 @@
 
 <body>
     <h1 style="text-align: center;">Welcome to the <span style="font-size:125%;">&pi;</span> Pond.</h1>
-    <p>Total shots fired: <span id="totalShotsFiredSpan"></span></p>
-    <p>Shots inside pond: <span id="shotsInsidePondSpan"></span></p>
-    <p>Approximation of Pi after <span id="numberOfIterationsSpan"></span> shots: <span
-            id="approximationOfPiSpan"></span></p>
+    <div id="resultsContainer">
+        <div id="totalShotsFiredRow" class="resultsRow">
+            <span>TOTAL SHOTS FIRED:</span>
+            <span id="totalShotsFiredSpan">0</span>
+        </div>
+        <div id="shotsInsidePondRow" class="resultsRow">
+            <span>SHOTS THAT LANDED INSIDE POND:</span>
+            <span id="shotsInsidePondSpan">0</span>
+        </div>
+        <div id="calculationOfPiRow" class="resultsRow">
+            <span>APPROXIMATION OF &pi; AFTER <span id="numberOfIterationsSpan">0</span> SHOTS:&nbsp;</span>
+            <span id="approximationOfPiSpan">0</span>
+        </div>
+    </div>
     <canvas id="pondCanvas"></canvas>
 
     <div id="explanation">
-        <h3>So what is this, anyway?</h3>
-        <p>The Pi Pond calculates Pi by firing cannonballs at random into a pond.</p>
-        <h4>The Math</h4>
-        <p>Imagine a square whose length is twice the radius of a certain circle. The area of the circle is Pi *
-            R<sup>2</sup>.
+        <h3><i>SO WHAT IS THIS, ANYWAY?</i></h3>
+        <p>The <b>&pi; Pond</b> calculates &pi; (Pi) by firing cannonballs at random into a pond.</p>
+        <h4>THE MATH(S)</h4>
+        <p>Imagine a square whose length is twice the radius of a certain circle. The area of the circle is
+            &pi;r<sup>2</sup>.
             The area of the square is the square of its length, L<sup>2</sup>. Since the length of the square is twice
             the radius of the circle,
             we can write the area of the square as (2R)<sup>2</sup>, or 4R<sup>2</sup>.</p>
-        <p>The ratio of the area of the circle to the area of the square is Pi * R<sup>2</sup> / 4R<sup>2</sup>, or Pi /
-            4. Therefore, Pi is equal to the ratio between the two areas, multiplied by 4.</p>
+        <p>The ratio of the area of the circle to the area of the square is &pi;r<sup>2</sup> / 4R<sup>2</sup>,
+            or &pi;/4. Therefore, &pi; is equal to the ratio between the two areas, multiplied by 4.</p>
+        <p>In the case of the <b>&pi; Pond</b>, &pi; is approximated as the number of cannonballs that land in the pond,
+            divided by the total number of cannonballs fired, multiplied by four.
+        </p>
         <p>By plotting coordinates onto the field (the square) at random, and checking which coordinates fall within the
             pond (the circle),
             we can approximate the area of the two shapes. The more random coordinates that are plotted, the closer the
-            approximation of Pi.</p>
-        <p>It was inspired by a challenge in A.K. Dewdney's <a
+            approximation of &pi;.</p>
+        <h3>INS&pi;RATION</h3>
+        <p>The <b>&pi; Pond</b> was inspired by a challenge in A.K. Dewdney's <a
                 href="https://www.amazon.com/Armchair-Universe-Exploration-Computer-Worlds/dp/0716719398"><i>The
-                    Armchair Universe</i></a>, a collection of articles about computers from Scientific American.
+                    Armchair Universe</i></a>, a collection of articles about recreational computer science from
+            <i>Scientific American</i>.
         </p>
-        <p>The Pi Pond was programmed using Vanilla JS and the HTML5 Canvas element.</p>
-    </div>
-
-    <footer>
-        <h3>Credits:</h3>
+        <p>The <b>&pi; Pond</b> was programmed using Vanilla JS and the HTML5 Canvas element.</p>
+        <h3>CREDITS</h3>
         <ul>
+            <li><strong>&pi; Pond created by Nicholas Bernhard</strong></li>
             <li><a href="https://freesound.org/people/OtisJames/sounds/215162/">Thud.wav</a> by Otis James, Public
                 Domain</li>
             <li><a href="https://freesound.org/people/Isaac200000/sounds/184650/">Cannon1.wav</a> by Isaac200000, Public
@@ -63,7 +183,12 @@
             <li><a href="https://freesound.org/people/SpliceSound/sounds/260131/">Cannonball off dock, splashing,
                     swimming.wav</a> by SpliceSound, Public Domain</li>
         </ul>
-    </footer>
+    </div>
+    <div id="pleaseRotateDevice">
+        <div id="pleaseRotateDeviceMessage">
+            <h1>PLEASE ROTATE DEVICE TO PORTAIT MODE</h1>
+        </div>
+    </div>
 </body>
 <script src="logic.js"></script>
 
