@@ -78,6 +78,10 @@ div#pleaseRotateDeviceMessage {
     text-align: center;
 }
 
+img.illo {
+    width: 20%;
+}
+
 /* DESKTOP */
 
 @media only screen and (orientation: landscape) and (min-width: 1201px) {
