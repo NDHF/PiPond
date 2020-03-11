@@ -1,5 +1,5 @@
 <svg
-	id = "illustration-02"
+	id = "illustration-03"
 	xmlns = "http://www.w3.org/2000/svg"
 	version = "1.1"
 	width = "100"
@@ -12,7 +12,7 @@
     <rect x="12.5" y="25" width="33" height="33" style="fill:blue;" />
     <circle cx="70.5" cy="41.5" r="16.5" style="fill:blue;" />
 
-	<text x="15" y="83" fill="black;" style="font-size:10;font-weight:bold;">a = (2r)<tspan baseline-shift = "super">2</tspan></text>
+	<text x="15" y="83" fill="black;" style="font-size:10;font-weight:bold;">a = 4r<tspan baseline-shift = "super">2</tspan></text>
 	<text x="57" y="83" fill="black;" style="font-size:10;font-weight:bold;">a = πr<tspan baseline-shift = "super">2</tspan></text>
 
 

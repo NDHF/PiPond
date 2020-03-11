@@ -34,13 +34,20 @@
         <h4>THE MATH(S)</h4>
         <p>Imagine a square and a circle of equal width.</p>
         <img class="illo" src="assets/images/illustration-01.svg" />
-        <p>Imagine a square whose length is twice the radius of a certain circle. The area of the circle is
-            &pi;r<sup>2</sup>.
-            The area of the square is the square of its length, L<sup>2</sup>. Since the length of the square is twice
-            the radius of the circle,
-            we can write the area of the square as (2R)<sup>2</sup>, or 4R<sup>2</sup>.</p>
-        <p>The ratio of the area of the circle to the area of the square is &pi;r<sup>2</sup> / 4R<sup>2</sup>,
-            or &pi;/4. Therefore, &pi; is equal to the ratio between the two areas, multiplied by 4.</p>
+        <p>The area of the circle is, of course, &pi;r<sup>2</sup>, which means the area of the square is (2r)<sup>2</sup>.</p>
+        <img class="illo" src="assets/images/illustration-02.svg" />
+        <p>(2r)<sup>2</sup> is the same as (2r)(2r), and can be simplified to 4r<sup>2</sup>.</p>
+        <img class="illo" src="assets/images/illustration-03.svg" />
+        <p>The ratio of the two areas is &pi;r<sup>2</sup> divided by 4r<sup>2</sup>.</p>
+        <img class="illo" src="assets/images/illustration-04.svg" />
+        <p>The r<sup>2</sup>'s cancel each other out&hellip;</p>
+        <img class="illo" src="assets/images/illustration-05.svg" />
+        <p>&hellip;leaving us with &pi; divided by four.</p>
+        <img class="illo" src="assets/images/illustration-06.svg" />
+        <p>If we multiply the ratio by four, we can get &pi; by itself.</p>
+        <p><strong>Therefore, &pi; is the ratio of the area of a circle and the area of a square,
+            multiplied by four.
+        </strong></p>
         <p>In the case of the <b>&pi; Pond</b>, &pi; is approximated as the number of cannonballs that land in the pond,
             divided by the total number of cannonballs fired, multiplied by four.
         </p>
@@ -48,6 +55,14 @@
             pond (the circle),
             we can approximate the area of the two shapes. The more random coordinates that are plotted, the closer the
             approximation of &pi;.</p>
+        <p>The <strong>&pi; Pond</strong> plots random coordinates (the cannonballs) onto a grid (the pond). By counting 
+        the number of shots that land in the pond, versus the total number of shots fired, the program can approximate 
+        the ratio of the two areas. When this ratio is multiplied by four, you get an approximation of &pi;.</p>
+        <p>The <strong>&pi; Pond</strong> is limited by resolution, and by limitations of the random-number generator used.</p>
+        <p>The program is currently using JavaScript's built-in Math.random() method, which in turn is probably using the <a href="https://en.wikipedia.org/wiki/Xorshift">xorshift128+</a> algorithm
+            adopted by most web browsers. xorshift128+ produces numbers which <em>appear</em> random enough, 
+            but are far from truly random.</p>
+        <p>Even then, the <strong>&pi; Pond</strong> will consistently return 3.1 after 1,000 shots.</p>
         <h3>INS&pi;RATION</h3>
         <p>The <b>&pi; Pond</b> was inspired by a challenge in A.K. Dewdney's <a
                 href="https://www.amazon.com/Armchair-Universe-Exploration-Computer-Worlds/dp/0716719398"><i>The

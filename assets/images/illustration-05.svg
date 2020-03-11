@@ -1,0 +1,25 @@
+<svg
+	id = "illustration-05"
+	xmlns = "http://www.w3.org/2000/svg"
+	version = "1.1"
+	width = "100"
+	height = "100"
+	viewBox = "0 0 100 100"
+	preserveAspectRatio = "none" >
+
+    <rect width="100" height="100" style="fill:white;" />
+
+    <rect x="12.5" y="55" width="33" height="33" style="fill:blue;" />
+    <circle cx="29" cy="29" r="16.5" style="fill:blue;" />
+
+	<!-- Line for square -->
+	<line x1="12.5" y1="50" x2="44.5" y2="50" style="stroke:black;stroke-width:2;stroke-linecap:round;" />
+	<!-- Line for circle -->
+	<line x1="54" y1="50" x2="87" y2="50" style="stroke:black;stroke-width:2;stroke-linecap:round;" />
+
+	<text x="57" y="45" fill="black;" style="font-size:10;font-weight:bold;">a = πr<tspan baseline-shift = "super">2</tspan></text>
+    <text x="57" y="65" fill="black;" style="font-size:10;font-weight:bold;">a = 4r<tspan baseline-shift = "super">2</tspan></text>
+
+    <line x1="85" y1="33" x2="80" y2="66" style="stroke:red;stroke-width:1;" />
+
+</svg>
