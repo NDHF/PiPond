@@ -104,6 +104,9 @@ img.illo {
         height: 0px;
         width: 0px;
     }
+    img.illo {
+        width: 50%;
+    }
 }
 
 /* MOBILE, PORTRAIT */
@@ -125,6 +128,9 @@ img.illo {
         visibility: collapse;
         height: 0px;
         width: 0px;
+    }
+    img.illo {
+        width: 100%;
     }
 }
 
