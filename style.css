@@ -112,6 +112,9 @@ img.illo {
 /* MOBILE, PORTRAIT */
 
 @media only screen and (orientation: portrait) {
+    p {
+        font-size: 130%;
+    }
     canvas {
         width: 100%;
     }
